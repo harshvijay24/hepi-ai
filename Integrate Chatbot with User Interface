@@ -1,0 +1,26 @@
+#Integrate Chatbot with User Interface
+class HepiAI:
+    def __init__(self, nutrition_model, query_classifier, sentiment_analyzer):
+        self.nutrition_model = nutrition_model
+        self.query_classifier = query_classifier
+        self.sentiment_analyzer = sentiment_analyzer
+
+    def get_nutrition_advice(self, user_profile):
+        recommended_calories = self.nutrition_model.predict([user_profile])
+        return f'Recommended daily calories: {recommended_calories[0]}'
+
+    def respond_to_query(self, query):
+        sentiment = self.sentiment_analyzer.polarity_scores(query)
+        response = self.query_classifier(query)
+        return response, sentiment
+
+# Example user profile and query
+user_profile = [25, 70, 175, 'moderate']
+hepi_ai = HepiAI(model, classify_query, sia)
+
+nutrition_advice = hepi_ai.get_nutrition_advice(user_profile)
+query_response, query_sentiment = hepi_ai.respond_to_query(query)
+
+print(nutrition_advice)
+print(query_response)
+print(query_sentiment)
