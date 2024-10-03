@@ -1,0 +1,20 @@
+#here the given below code for data cleaning and preprocessing
+  import pandas as pd
+import numpy as np
+
+# Example datasets for nutrition, fitness, mental health, and sleep
+nutrition_data = pd.read_csv('nutrition_data.csv')
+fitness_data = pd.read_csv('fitness_data.csv')
+mental_health_data = pd.read_csv('mental_health_data.csv')
+sleep_data = pd.read_csv('sleep_data.csv')
+
+# Data preprocessing
+def preprocess_data(df):
+    df = df.dropna()  # Handle missing values
+    df = df.apply(lambda x: x.astype(str).str.lower())  # Normalize text
+    return df
+
+nutrition_data = preprocess_data(nutrition_data)
+fitness_data = preprocess_data(fitness_data)
+mental_health_data = preprocess_data(mental_health_data)
+sleep_data = preprocess_data(sleep_data)
