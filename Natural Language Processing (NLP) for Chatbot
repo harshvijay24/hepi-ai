@@ -1,0 +1,29 @@
+
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+
+# Example text classification model for user queries
+nltk.download('vader_lexicon')
+sia = SentimentIntensityAnalyzer()
+
+# Example dataset for user queries and responses
+queries = ['What should I eat today?', 'I feel stressed', 'How much should I sleep?']
+responses = ['Here is a personalized meal plan...', 'Let me help you with stress management...', 'You should aim for 7-9 hours of sleep...']
+
+vectorizer = TfidfVectorizer()
+X_queries = vectorizer.fit_transform(queries)
+y_responses = responses
+
+model = LogisticRegression()
+model.fit(X_queries, y_responses)
+
+def classify_query(query):
+    query_vector = vectorizer.transform([query])
+    response = model.predict(query_vector)
+    return response[0]
+
+query = "I'm feeling anxious"
+response = classify_query(query)
+print(response)
